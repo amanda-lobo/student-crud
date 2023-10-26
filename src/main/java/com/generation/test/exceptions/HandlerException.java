@@ -19,4 +19,15 @@ public class HandlerException {
                 .build();
         return new ResponseEntity<>(exceptionDetails, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(InvalidNoteException.class)
+    public ResponseEntity<ExceptionDetails> handlerInvalidNoteException(InvalidNoteException e) {
+        ExceptionDetails exceptionDetails = ExceptionDetails.builder()
+                .title("Bad Request")
+                .message(e.getMessage())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .timeStamp(LocalDateTime.now())
+                .build();
+        return new ResponseEntity<>(exceptionDetails, HttpStatus.BAD_REQUEST);
+    }
 }
